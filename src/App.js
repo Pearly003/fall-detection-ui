@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './App.css'; 
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import CreateAccount from './pages/CreateAccount';
+
+import LiveStream from './pages/LiveStream';
+import Settings from './pages/Settings';
+import Calendar from './pages/Calendar';
 function App() {
   const [status, setStatus] = useState(null);
 
@@ -17,13 +24,16 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Fall Detection Dashboard</h1>
-        <p>Status from backend:</p>
-        <p>{status || 'Loading...'}</p>
-      </header>
-    </div>
+
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/create-account" element={<CreateAccount />} />
+            <Route path="/livestream" element={<LiveStream />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/calendar" element={<Calendar />} />
+          </Routes>
+        </Router>
   );
 }
 
