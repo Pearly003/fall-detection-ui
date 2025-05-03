@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
+import './CreateAccount.css'; 
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 export default function Home() {

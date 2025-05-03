@@ -1,21 +1,21 @@
+// App.js (React for Web)
 import React, { useEffect, useState } from 'react';
-import './App.css'; 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import CreateAccount from './pages/CreateAccount';
-
 import LiveStream from './pages/LiveStream';
 import Settings from './pages/Settings';
 import Calendar from './pages/Calendar';
+
 function App() {
   const [status, setStatus] = useState(null);
 
   useEffect(() => {
-    fetch('https://falldetection.me/api/status')
+    fetch('http://134.208.3.240:5000/status')
       .then(res => res.json())
       .then(data => {
         console.log('API response:', data);
-        setStatus(data.message); 
+        setStatus(data.status); // "Camera online" or "Camera offline"
       })
       .catch(error => {
         console.error('Fetch error:', error);
@@ -24,16 +24,16 @@ function App() {
   }, []);
 
   return (
-
-        <Router>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/create-account" element={<CreateAccount />} />
-            <Route path="/livestream" element={<LiveStream />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/calendar" element={<Calendar />} />
-          </Routes>
-        </Router>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LiveStream />} />
+        <Route path="/create-account" element={<CreateAccount />} />
+        <Route path="/livestream" element={<LiveStream />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/calendar" element={<Calendar />} />
+        <Route path="/stream/:ipAddress" element={<LiveStream />} />
+      </Routes>
+    </Router>
   );
 }
 
